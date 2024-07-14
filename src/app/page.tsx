@@ -14,6 +14,7 @@ export default function Home() {
   const [tweets, setTweets] = useState<Tweet[]>([]);
   const [page, setPage] = useState(1); // Current page
   const [hasMore, setHasMore] = useState(true); // Indicator if there are more tweets to load
+  const [loading, setLoading] = useState(false); // Indicator if tweets are loading
   const limit = 10; // Records per page
 
   const handleFormToggle = () => {
@@ -41,6 +42,7 @@ export default function Home() {
 
   const fetchTweets = async (clear = false) => {
     try {
+      setLoading(true); // Set loading to true before fetching
       const response = await fetch(`/get-tweets?page=${page}&limit=${limit}`);
       if (!response.ok) throw new Error("Failed to fetch");
       const data = await response.json();
@@ -64,6 +66,8 @@ export default function Home() {
     } catch (error) {
       console.error("Error fetching tweets:", error);
       setMessage({ type: "error", text: "Failed to load tweets." });
+    } finally {
+      setLoading(false); // Set loading to false after fetching
     }
   };
 
@@ -130,7 +134,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center px-6 pt-4">
       <div className="z-10 w-full max-w-5xl mx-auto font-mono text-sm flex flex-col items-center justify-between lg:flex-row">
-        <p className="flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:relative lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30 text-3xl font-bold">
+        <p className="flex w-full justify-center pb-6 pt-8 lg:relative lg:w-auto lg:rounded-xl  text-3xl font-bold">
           <span className="text-green-500">Mzalendo</span>
           <span className="text-red-500">Alert</span>
         </p>
@@ -213,11 +217,17 @@ export default function Home() {
         </div>
       )}
 
-      <div className="mt-20 mb-32 grid gap-6 text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-2 lg:text-left">
-        {tweets.map((tweet) => (
-          <Tweet key={tweet.tweetId} id={tweet.tweetId} />
-        ))}
-      </div>
+      {loading ? (
+        <div className="mt-20 mb-32 text-center text-gray-500">
+          <p>Loading tweets...</p>
+        </div>
+      ) : (
+        <div className="mt-20 mb-32 grid gap-6 text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-2 lg:text-left">
+          {tweets.map((tweet) => (
+            <Tweet key={tweet.tweetId} id={tweet.tweetId} />
+          ))}
+        </div>
+      )}
 
       {tweets.length > 0 && hasMore ? (
         <button
@@ -227,23 +237,25 @@ export default function Home() {
           Load More
         </button>
       ) : (
-        <p className="mt-5 text-sm font-semibold text-gray-500">
-          That&apos;s all for now! Have any updates? Share your report{" "}
-          {
-            // open the form when there are no tweets
+        !loading && (
+          <p className="mt-5 text-sm font-semibold text-gray-500">
+            That&apos;s all for now! Have any updates? Report missing{" "}
+            {
+              // open the form when there are no tweets
 
-            <button
-              // should alway push the users current position to the top of the page and show form
-              onClick={() => {
-                setIsFormVisible(true);
-                window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-              className="text-green-500 hover:underline"
-            >
-              here
-            </button>
-          }
-        </p>
+              <button
+                // should alway push the users current position to the top of the page and show form
+                onClick={() => {
+                  setIsFormVisible(true);
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className="text-green-500 hover:underline"
+              >
+                here.
+              </button>
+            }
+          </p>
+        )
       )}
 
       <div className="text-center py-10">
