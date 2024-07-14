@@ -15,6 +15,8 @@ export default function Home() {
   const [page, setPage] = useState(1); // Current page
   const [hasMore, setHasMore] = useState(true); // Indicator if there are more tweets to load
   const [loading, setLoading] = useState(false); // Indicator if tweets are loading
+  const [isModalVisible, setIsModalVisible] = useState(false); // Indicator if the modal is visible
+  const [formPending, setFormPending] = useState(false); // Indicator if form submission is pending
   const limit = 10; // Records per page
 
   const handleFormToggle = () => {
@@ -89,9 +91,7 @@ export default function Home() {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
+  const handleSubmit = async () => {
     if (!validateTweetUrl(tweetUrl)) {
       setMessage({
         type: "error",
@@ -128,13 +128,32 @@ export default function Home() {
         type: "error",
         text: "An error occurred while saving the report.",
       });
+    } finally {
+      setFormPending(false);
+      setIsModalVisible(false);
     }
+  };
+
+  const handleReportClick = () => {
+    if (!validateTweetUrl(tweetUrl)) {
+      setMessage({
+        type: "error",
+        text: "Invalid URL format. Please enter a valid tweet URL.",
+      });
+      return;
+    }
+    setIsModalVisible(true);
+  };
+
+  const handleConfirmReport = () => {
+    setFormPending(true);
+    handleSubmit();
   };
 
   return (
     <main className="flex min-h-screen flex-col items-center px-6 pt-4">
       <div className="z-10 w-full max-w-5xl mx-auto font-mono text-sm flex flex-col items-center justify-between lg:flex-row">
-        <p className="flex w-full justify-center pb-6 pt-8 lg:relative lg:w-auto lg:rounded-xl  text-3xl font-bold">
+        <p className="flex w-full justify-center pb-6 pt-8 lg:relative lg:w-auto lg:rounded-xl text-3xl font-bold">
           <span className="text-green-500">Mzalendo</span>
           <span className="text-red-500">Alert</span>
         </p>
@@ -165,7 +184,13 @@ export default function Home() {
       </div>
 
       {isFormVisible ? (
-        <form className="w-full max-w-xl mx-auto mt-8" onSubmit={handleSubmit}>
+        <form
+          className="w-full max-w-xl mx-auto mt-8"
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleReportClick();
+          }}
+        >
           <div className="mb-5 text-center">
             <label
               htmlFor="tweetUrl"
@@ -176,25 +201,38 @@ export default function Home() {
             <input
               type="url"
               id="tweetUrl"
-              className="w-full max-w-md px-4 py-2 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-green-500 focus:border-green-500 block mx-auto dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"
+              className="w-full max-w-md px-4 py-4 shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-full focus:ring-green-500 focus:border-green-500 block mx-auto dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500 dark:shadow-sm-light"
               placeholder="https://x.com/TanzaniaLeaks/status/1234567890123456789"
               value={tweetUrl}
               onChange={handleInputChange}
               required
             />
             {message.text && (
-              <p
-                className={`mt-2 text-sm ${
-                  message.type === "error" ? "text-red-600" : "text-green-600"
+              <div
+                className={`flex items-center p-4 mt-6 mb-4 text-sm ${
+                  message.type === "error"
+                    ? "text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                    : "text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
                 }`}
+                role="alert"
               >
-                {message.text}
-              </p>
+                <svg
+                  className="flex-shrink-0 inline w-4 h-4 me-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                </svg>
+                <span className="sr-only">Info</span>
+                <div> {message.text}</div>
+              </div>
             )}
           </div>
           <div className="text-center">
             <button
-              type="submit"
+              onClick={handleReportClick}
               className="text-white rounded-full bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
             >
               Report Missing
@@ -244,11 +282,8 @@ export default function Home() {
               // open the form when there are no tweets
 
               <button
-                // should alway push the users current position to the top of the page and show form
-                onClick={() => {
-                  setIsFormVisible(true);
-                  window.scrollTo({ top: 0, behavior: "smooth" });
-                }}
+                // should always push the users current position to the top of the page and show form
+                onClick={handleFormToggle}
                 className="text-green-500 hover:underline"
               >
                 here.
@@ -268,6 +303,76 @@ export default function Home() {
           tweets.
         </p>
       </div>
+
+      {isModalVisible && (
+        <div
+          id="popup-modal"
+          tabIndex="-1"
+          className="fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full bg-gray-800 bg-opacity-50"
+        >
+          <div className="relative p-4 w-full max-w-md">
+            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
+              <button
+                type="button"
+                className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                onClick={() => setIsModalVisible(false)}
+              >
+                <svg
+                  className="w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 14 14"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7l-6 6"
+                  />
+                </svg>
+                <span className="sr-only">Close modal</span>
+              </button>
+              <div className="p-4 md:p-5 text-center">
+                <svg
+                  className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+                  />
+                </svg>
+                <h3 className="mb-5 text-lg font-bold text-gray-500 dark:text-gray-400">
+                  Please confirm: Is this missing person report accurate and
+                  genuine?
+                </h3>{" "}
+                <button
+                  onClick={() => setIsModalVisible(false)}
+                  type="button"
+                  className="py-2.5 px-5 mr-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+                >
+                  No, cancel
+                </button>
+                <button
+                  onClick={handleConfirmReport}
+                  type="button"
+                  className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
+                >
+                  Yes, I'm sure
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   );
 }

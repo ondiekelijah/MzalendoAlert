@@ -39,7 +39,7 @@ export async function POST(request) {
   fs.writeFileSync(filePath, JSON.stringify(tweets, null, 2));
 
   return NextResponse.json(
-    { message: "Report successfully added!" },
+    { message: "Thank you! Your report has been successfully submitted!" },
     { status: 200 }
   );
 }
