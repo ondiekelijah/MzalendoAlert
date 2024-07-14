@@ -259,8 +259,9 @@ export default function Home() {
       )}
 
       <div className="text-center py-10">
-        <p className="text-slate-900 font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight dark:text-white">
-          MzalendoAlert
+        <p className="text-slate-900 font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight dark:text-white flex justify-center">
+          <span className="text-green-500">Mzalendo</span>
+          <span className="text-red-500">Alert</span>
         </p>
         <p className="small-text mt-6">
           We do not collect user data. All data displayed here are embedded
