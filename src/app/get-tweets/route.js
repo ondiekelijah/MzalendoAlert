@@ -13,7 +13,8 @@ export async function GET(request) {
   }
 
   try {
-    const tweets = await Tweets.find({});
+    // Assuming 'createdAt' is the field you want to sort by
+    const tweets = await Tweets.find({}).sort({ createdAt: -1 }); // Add .sort({ createdAt: -1 }) for descending order
     return NextResponse.json({ tweets }, { status: 200 });
   } catch (error) {
     console.error("Error fetching tweets:", error);
