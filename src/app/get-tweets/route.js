@@ -1,7 +1,8 @@
-import fs from "fs";
-import path from "path";
-
 import { NextResponse } from "next/server";
+import dbConnect from "../lib/mongodb";
+import Tweets from "../models/Tweets";
+
+dbConnect();
 
 export async function GET(request) {
   if (request.method !== "GET") {
@@ -11,14 +12,14 @@ export async function GET(request) {
     );
   }
 
-  const filePath = path.join(process.cwd(), "tweets.json");
-  let tweets = [];
-
-  if (fs.existsSync(filePath)) {
-    tweets = JSON.parse(fs.readFileSync(filePath, "utf8"));
-  } else {
-    return NextResponse.json({ message: "No tweets found" }, { status: 404 });
+  try {
+    const tweets = await Tweets.find({});
+    return NextResponse.json({ tweets }, { status: 200 });
+  } catch (error) {
+    console.error("Error fetching tweets:", error);
+    return NextResponse.json(
+      { message: "Failed to fetch tweets" },
+      { status: 500 }
+    );
   }
-
-  return NextResponse.json({ tweets }, { status: 200 });
 }

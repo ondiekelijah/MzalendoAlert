@@ -217,7 +217,9 @@ export default function Home() {
                 role="alert"
               >
                 <svg
-                  className="flex-shrink-0 inline w-4 h-4 me-3"
+                  className={`flex-shrink-0 inline w-4 h-4 me-3 ${
+                    message.type === "error" ? "text-red-500" : "text-green-500"
+                  }`}
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -227,15 +229,45 @@ export default function Home() {
                 </svg>
                 <span className="sr-only">Info</span>
                 <div> {message.text}</div>
+                <button
+                  type="button"
+                  className="ml-auto -mx-1.5 -my-1.5 bg-transparent text-current rounded-lg p-1.5 hover:bg-opacity-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-current"
+                  aria-label="Close"
+                  onClick={() => setMessage({ type: "", text: "" })}
+                >
+                  <span className="sr-only">Close</span>
+                  <svg
+                    className={`w-4 h-4 ${
+                      message.type === "error"
+                        ? "text-red-500"
+                        : "text-green-500"
+                    }`}
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 20"
+                  >
+                    <path
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="1"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                    />
+                  </svg>
+                </button>
               </div>
             )}
           </div>
           <div className="text-center">
             <button
               onClick={handleReportClick}
-              className="text-white rounded-full bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+              className={`text-white rounded-full bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 ${
+                formPending ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+              disabled={formPending}
             >
-              Report Missing
+              {formPending ? "Submitting..." : "Report Missing"}
             </button>
           </div>
         </form>
@@ -350,7 +382,7 @@ export default function Home() {
                     d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
                   />
                 </svg>
-                <h3 className="mb-5 text-lg font-bold text-gray-500 dark:text-gray-400">
+                <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
                   Please confirm: Is this missing person report accurate and
                   genuine?
                 </h3>{" "}

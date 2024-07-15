@@ -1,7 +1,8 @@
-import fs from "fs";
-import path from "path";
-
 import { NextResponse } from "next/server";
+import dbConnect from "../lib/mongodb";
+import Tweets from "../models/Tweets";
+
+dbConnect();
 
 export async function POST(request) {
   if (request.method !== "POST") {
@@ -20,27 +21,33 @@ export async function POST(request) {
   }
 
   const { tweetId } = body;
-  const filePath = path.join(process.cwd(), "tweets.json");
-  let tweets = [];
-
-  if (fs.existsSync(filePath)) {
-    tweets = JSON.parse(fs.readFileSync(filePath, "utf8"));
+  if (!tweetId) {
+    return NextResponse.json({ message: "Missing tweetId" }, { status: 400 });
   }
 
-  // Check if the tweetId already exists in the array
-  if (tweets.some(tweet => tweet.tweetId === tweetId)) {
+  // Check if the tweetId already exists in the collection
+  const existingTweet = await Tweets.findOne({
+    tweetId,
+  });
+  if (existingTweet) {
     return NextResponse.json(
       { message: "Report already exists" },
-      { status: 409 } // 409 Conflict
-    );
+      { status: 409 }
+    ); // 409 Conflict
   }
 
-  tweets.push({ tweetId });
-  fs.writeFileSync(filePath, JSON.stringify(tweets, null, 2));
-
-  return NextResponse.json(
-    { message: "Thank you! Your report has been successfully submitted!" },
-    { status: 200 }
-  );
+  // Insert the new tweet
+  try {
+    await Tweets.create({ tweetId });
+    return NextResponse.json(
+      { message: "Thank you! Your report has been successfully submitted!" },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error inserting tweet:", error);
+    return NextResponse.json(
+      { message: "Failed to submit report" },
+      { status: 500 } // Internal Server Error
+    );
+  }
 }
-
