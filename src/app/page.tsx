@@ -166,7 +166,7 @@ export default function Home() {
         </p>
         <div className="w-full flex items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:relative lg:p-4 lg:w-auto lg:bg-none">
           <button
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 text-white bg-green-600 rounded-full shadow-lg transition-all hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-offset-2 mt-4 lg:mt-0"
+            className="inline-flex items-center font-mono justify-center gap-2 px-6 py-3 text-white bg-green-600 rounded-full shadow-lg transition-all hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-offset-2 mt-4 lg:mt-0"
             onClick={handleFormToggle}
           >
             <span>Report a Missing Mzalendo</span>
