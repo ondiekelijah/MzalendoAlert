@@ -316,6 +316,7 @@ export default function Home() {
         </button>
       ) : (
         !loading && (
+          <div className="mt-5 text-center text-gray-500">
           <p className="mt-5 text-sm font-semibold text-gray-500">
             That&apos;s all for now! Have any updates? Report missing{" "}
             {
@@ -330,6 +331,7 @@ export default function Home() {
               </button>
             }
           </p>
+        </div>
         )
       )}
 
