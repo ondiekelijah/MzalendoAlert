@@ -28,7 +28,7 @@ export default function Home() {
     setIsFormVisible(!isFormVisible);
     setMessage({ type: "", text: "" }); // Clear previous messages when toggling form
     window.scrollTo(0, 0);
-  }
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTweetUrl(e.target.value);
@@ -158,8 +158,8 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center px-6 pt-4">
-      <div className="z-10 w-full max-w-5xl mx-auto font-mono text-sm flex flex-col items-center justify-between lg:flex-row">
+    <main className="flex min-h-screen flex-col items-center px-4 pt-4">
+      <div className="z-10 w-full max-w-5xl mx-auto  text-sm flex flex-col items-center justify-between lg:flex-row">
         <p className="flex w-full justify-center pb-6 pt-8 lg:relative lg:w-auto lg:rounded-xl text-3xl font-bold">
           <span className="text-green-500">Mzalendo</span>
           <span className="text-red-500">Alert</span>
@@ -281,13 +281,13 @@ export default function Home() {
       ) : (
         <div className="mt-8 text-center w-auto flex flex-col items-center gap-8">
           <h1 className="max-w-4xl text-slate-900 font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight dark:text-white">
-            Every Tweet Counts: Help Us Locate Missing Loved Ones.
+            Help Families Reunite: Report a Missing Mzalendo.
           </h1>
           <a
             target="_blank"
             rel="noopener noreferrer"
             href="https://www.buymeacoffee.com/Teksad"
-            className="text-white rounded-full bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+            className="text-white rounded-full bg-green-700 hover:bg-green-800 font-mono focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
           >
             ❤ Support MzalendoAlert
           </a>
@@ -333,7 +333,7 @@ export default function Home() {
       )}
 
       <div className="text-center py-10">
-        <p className="text-slate-900 font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight dark:text-white flex justify-center">
+        <p className="text-slate-900  font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight dark:text-white flex justify-center">
           <span className="text-green-500">Mzalendo</span>{" "}
           <span className="text-red-500">Alert</span>
         </p>
@@ -345,7 +345,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
           href="https://www.buymeacoffee.com/Teksad"
-          className="text-white rounded-full bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          className="text-white rounded-full font-mono bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
         >
           ❤ Support MzalendoAlert
         </a>
