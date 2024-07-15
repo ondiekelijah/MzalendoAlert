@@ -147,6 +147,7 @@ export default function Home() {
 
   const handleConfirmReport = () => {
     setFormPending(true);
+    setIsModalVisible(false);
     handleSubmit();
   };
 
