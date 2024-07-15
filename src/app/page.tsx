@@ -351,6 +351,26 @@ export default function Home() {
         </a>
       </div>
 
+      {/* Add two links to the left "FinanceBillChatGPT " and "Hashtags" */}
+      <div className="flex flex-col text-center sm:flex-row justify-between w-full max-w-5xl mx-auto mt-8 mb-4">
+  <a
+    href="https://chatgpt.com/g/g-JBq7D0E5x-finance-bill-gpt"
+    target="_blank"
+    className="text-green-500 mb-4 sm:mb-0" // Removed hover:underline and added margin-bottom for small screens
+  >
+    FinanceBillGPT
+  </a>
+  <a
+    href="https://kenyalaw.org/kl/fileadmin/pdfdownloads/TheConstitutionOfKenya.pdf"
+    target="_blank"
+    className="text-green-500" // Removed hover:underline
+  >
+    The Constitution of Kenya
+  </a>
+</div>
+
+
+
       {isModalVisible && (
         <div
           id="popup-modal"
@@ -420,6 +440,7 @@ export default function Home() {
           </div>
         </div>
       )}
+
     </main>
   );
 }
