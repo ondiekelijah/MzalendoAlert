@@ -164,30 +164,16 @@ export default function Home() {
           <span className="text-green-500">Mzalendo</span>
           <span className="text-red-500">Alert</span>
         </p>
-        <div className="w-full flex items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:relative lg:p-4 lg:w-auto lg:bg-none">
-          <button
-            className="inline-flex items-center font-mono justify-center gap-2 px-6 py-3 text-white bg-green-600 rounded-full shadow-lg transition-all hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-offset-2 mt-4 lg:mt-0"
-            onClick={handleFormToggle}
-          >
-            <span>Report a Missing Mzalendo</span>
-            <svg
-              className="w-3 h-4 transition-transform group-hover:translate-x-1 motion-reduce:transform-none"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 10"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M1 5h12m0 0L9 1m4 4L9 9"
-              />
-            </svg>
-            <span className="sr-only">arrow-icon</span>
-          </button>
-        </div>
+        <div className="hidden lg:flex w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:relative lg:p-4 lg:w-auto lg:bg-none">
+  <a
+    target="_blank"
+    rel="noopener noreferrer"
+    href="https://www.buymeacoffee.com/Teksad"
+    className="text-white rounded-full bg-green-700 hover:bg-green-800 font-mono focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+  >
+    ❤ Support MzalendoAlert
+  </a>
+</div>
       </div>
 
       {isFormVisible ? (
@@ -283,14 +269,29 @@ export default function Home() {
           <h1 className="max-w-4xl text-slate-900 font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight dark:text-white">
             Help Families Reunite: Report a Missing Mzalendo.
           </h1>
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href="https://www.buymeacoffee.com/Teksad"
-            className="text-white rounded-full bg-green-700 hover:bg-green-800 font-mono focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+
+          <button
+            className="inline-flex items-center font-mono justify-center gap-2 px-6 py-3 text-white bg-green-600 rounded-full shadow-lg transition-all hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-700 focus:ring-offset-2 mt-4 lg:mt-0"
+            onClick={handleFormToggle}
           >
-            ❤ Support MzalendoAlert
-          </a>
+            <span>Report Missing Mzalendo</span>
+            <svg
+              className="w-3 h-4 transition-transform group-hover:translate-x-1 motion-reduce:transform-none"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 10"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M1 5h12m0 0L9 1m4 4L9 9"
+              />
+            </svg>
+            <span className="sr-only">arrow-icon</span>
+          </button>
         </div>
       )}
 
@@ -352,7 +353,7 @@ export default function Home() {
       </div>
 
       {/* Add two links to the left "FinanceBillChatGPT " and "Hashtags" */}
-      <div className="flex flex-col text-center sm:flex-row justify-between w-full max-w-5xl mx-auto mt-8 mb-4">
+      <div className="flex flex-col font-mono text-center sm:flex-row justify-between w-full max-w-5xl mx-auto mt-8 mb-4">
   <a
     href="https://chatgpt.com/g/g-JBq7D0E5x-finance-bill-gpt"
     target="_blank"
@@ -365,7 +366,24 @@ export default function Home() {
     target="_blank"
     className="text-green-500" // Removed hover:underline
   >
-    The Constitution of Kenya
+    The Constitution of Kenya 
+    {/* add xternal link icon */}
+    <svg
+      className="w-4 h-4 inline-block me-1.5"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="2"
+        d="M17 8l4 4m0 0l-4 4m4-4H3"
+      />
+    </svg>
+
   </a>
 </div>
 
