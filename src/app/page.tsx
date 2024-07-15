@@ -24,6 +24,12 @@ export default function Home() {
     setMessage({ type: "", text: "" }); // Clear previous messages when toggling form
   };
 
+  const handeFormToggleAndScrollToTop = () => {
+    setIsFormVisible(!isFormVisible);
+    setMessage({ type: "", text: "" }); // Clear previous messages when toggling form
+    window.scrollTo(0, 0);
+  }
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTweetUrl(e.target.value);
   };
@@ -283,7 +289,7 @@ export default function Home() {
             href="https://www.buymeacoffee.com/Teksad"
             className="text-white rounded-full bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
           >
-            Support MzalendoAlert
+            ❤ Support MzalendoAlert
           </a>
         </div>
       )}
@@ -316,7 +322,7 @@ export default function Home() {
 
               <button
                 // should always push the users current position to the top of the page and show form
-                onClick={handleFormToggle}
+                onClick={handeFormToggleAndScrollToTop}
                 className="text-green-500 hover:underline"
               >
                 here.
@@ -328,13 +334,21 @@ export default function Home() {
 
       <div className="text-center py-10">
         <p className="text-slate-900 font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight dark:text-white flex justify-center">
-          <span className="text-green-500">Mzalendo</span>
+          <span className="text-green-500">Mzalendo</span>{" "}
           <span className="text-red-500">Alert</span>
         </p>
-        <p className="small-text mt-6">
+        <p className="small-text my-6">
           We do not collect user data. All data displayed here are embedded
           tweets.
         </p>
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://www.buymeacoffee.com/Teksad"
+          className="text-white rounded-full bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+        >
+          ❤ Support MzalendoAlert
+        </a>
       </div>
 
       {isModalVisible && (
