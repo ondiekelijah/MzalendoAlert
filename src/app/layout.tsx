@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ScrollToTopButton from "./components/scrollToTop";
+import ScrollToTopButton from "./components/ScrollToTop";
 
 const inter = Inter({ subsets: ["latin"] });
 

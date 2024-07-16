@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import dbConnect from "../lib/mongodb";
-import Tweets from "../models/Tweets";
+import dbConnect from "../../lib/mongodb";
+import Tweets from "../../models/Tweets";
 
 dbConnect();
 
@@ -13,8 +13,7 @@ export async function GET(request) {
   }
 
   try {
-    // Assuming 'createdAt' is the field you want to sort by
-    const tweets = await Tweets.find({}).sort({ createdAt: -1 }); // Add .sort({ createdAt: -1 }) for descending order
+    const tweets = await Tweets.find({}).sort({ createdAt: -1 }); 
     return NextResponse.json({ tweets }, { status: 200 });
   } catch (error) {
     console.error("Error fetching tweets:", error);

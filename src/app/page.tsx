@@ -2,10 +2,24 @@
 
 import { useEffect, useState } from "react";
 import { Tweet } from "react-tweet";
+import Accordion from "./components/Accordion";
 
 type Tweet = {
   tweetId: string;
 };
+
+const accordionData = [
+  {
+    title: "What to do if someone goes missing",
+    content:
+      "When a person goes missing, report to the police and post on X, then share the post here on MzalendoAlert.",
+  },
+  {
+    title: "Links to support organizations and hotlines",
+    content:
+      "We invite members of the public to report any incidences of violence or arrests during the peaceful protests to the @LawSocietyofKe toll-free line: 0800720434.",
+  },
+];
 
 export default function Home() {
   const [isFormVisible, setIsFormVisible] = useState(false);
@@ -41,8 +55,6 @@ export default function Home() {
   };
 
   const extractTweetId = (url: string) => {
-    // Using \w to match any word character (equivalent to [a-zA-Z0-9_])
-    // Using RegExp.exec() for matching
     const regex = new RegExp(/^https:\/\/x\.com\/\w{1,15}\/status\/(\d+)$/);
     const match = regex.exec(url);
     return match ? match[1] : null;
@@ -51,7 +63,9 @@ export default function Home() {
   const fetchTweets = async (clear = false) => {
     try {
       setLoading(true); // Set loading to true before fetching
-      const response = await fetch(`/get-tweets?page=${page}&limit=${limit}`);
+      const response = await fetch(
+        `/api/get-tweets?page=${page}&limit=${limit}`
+      );
       if (!response.ok) throw new Error("Failed to fetch");
       const data = await response.json();
       if (clear) {
@@ -109,7 +123,7 @@ export default function Home() {
     const tweetId = extractTweetId(tweetUrl);
 
     try {
-      const response = await fetch("/save-tweet", {
+      const response = await fetch("/api/save-tweet", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -165,15 +179,15 @@ export default function Home() {
           <span className="text-red-500">Alert</span>
         </p>
         <div className="hidden lg:flex w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:relative lg:p-4 lg:w-auto lg:bg-none">
-  <a
-    target="_blank"
-    rel="noopener noreferrer"
-    href="https://www.buymeacoffee.com/Teksad"
-    className="text-white rounded-full bg-green-700 hover:bg-green-800 font-mono focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-  >
-    ❤ Support MzalendoAlert
-  </a>
-</div>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://www.buymeacoffee.com/Teksad"
+            className="text-white rounded-full bg-green-700 hover:bg-green-800 font-mono focus:ring-4 focus:outline-none focus:ring-green-300 font-medium text-sm px-5 py-2.5 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+          >
+            ❤ Support MzalendoAlert
+          </a>
+        </div>
       </div>
 
       {isFormVisible ? (
@@ -317,30 +331,29 @@ export default function Home() {
       ) : (
         !loading && (
           <div className="mt-5 text-center text-gray-500">
-          <p className="mt-5 text-sm font-semibold text-gray-500">
-            That&apos;s all for now! Have any updates? Report missing{" "}
-            {
-              // open the form when there are no tweets
-
-              <button
-                // should always push the users current position to the top of the page and show form
-                onClick={handeFormToggleAndScrollToTop}
-                className="text-green-500 hover:underline"
-              >
-                here.
-              </button>
-            }
-          </p>
-        </div>
+            <p className="mt-5 text-sm font-semibold text-gray-500">
+              That&apos;s all for now! Have any updates? Report missing{" "}
+              {
+                <button
+                  onClick={handeFormToggleAndScrollToTop}
+                  className="text-green-500 hover:underline"
+                >
+                  here.
+                </button>
+              }
+            </p>
+          </div>
         )
       )}
+
+      <Accordion items={accordionData} />
 
       <div className="text-center py-10">
         <p className="text-slate-900  font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight dark:text-white flex justify-center">
           <span className="text-green-500">Mzalendo</span>{" "}
           <span className="text-red-500">Alert</span>
         </p>
-        <p className="small-text my-6">
+        <p className="small-text my-6 text-gray-400">
           We do not collect user data. All data displayed here are embedded
           tweets.
         </p>
@@ -354,42 +367,37 @@ export default function Home() {
         </a>
       </div>
 
-      {/* Add two links to the left "FinanceBillChatGPT " and "Hashtags" */}
       <div className="flex flex-col font-mono text-center sm:flex-row justify-between w-full max-w-5xl mx-auto mt-8 mb-4">
-  <a
-    href="https://chatgpt.com/g/g-JBq7D0E5x-finance-bill-gpt"
-    target="_blank"
-    className="text-green-500 mb-4 sm:mb-0" // Removed hover:underline and added margin-bottom for small screens
-  >
-    FinanceBillGPT
-  </a>
-  <a
-    href="https://kenyalaw.org/kl/fileadmin/pdfdownloads/TheConstitutionOfKenya.pdf"
-    target="_blank"
-    className="text-green-500" // Removed hover:underline
-  >
-    The Constitution of Kenya 
-    {/* add xternal link icon */}
-    <svg
-      className="w-4 h-4 inline-block me-1.5"
-      aria-hidden="true"
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth="2"
-        d="M17 8l4 4m0 0l-4 4m4-4H3"
-      />
-    </svg>
-
-  </a>
-</div>
-
-
+        <a
+          href="https://chatgpt.com/g/g-JBq7D0E5x-finance-bill-gpt"
+          target="_blank"
+          className="text-green-500 mb-4 sm:mb-0"
+        >
+          FinanceBillGPT
+        </a>
+        <a
+          href="https://kenyalaw.org/kl/fileadmin/pdfdownloads/TheConstitutionOfKenya.pdf"
+          target="_blank"
+          className="text-green-500"
+        >
+          The Constitution of Kenya
+          <svg
+            className="w-4 h-4 inline-block me-1.5"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </a>
+      </div>
 
       {isModalVisible && (
         <div
@@ -460,7 +468,6 @@ export default function Home() {
           </div>
         </div>
       )}
-
     </main>
   );
 }
