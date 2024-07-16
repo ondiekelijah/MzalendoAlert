@@ -7,26 +7,13 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "MzalendoAlert",
-  description: "Every Tweet Counts: Help Us Locate Missing Loved Ones.",
+  description: "Support our efforts to locate missing loved ones. Post tweets, find helpful links, and get guidance on what to do when someone goes missing. Your tweets can bring someone home.",
   metadataBase: new URL("https://www.mzalendoalert.com"),
   openGraph: {
     title: "MzalendoAlert",
-    description: "Every Tweet Counts: Help Us Locate Missing Loved Ones.",
+    description: "Support our efforts to locate missing loved ones. Post tweets, find helpful links, and get guidance on what to do when someone goes missing. Your tweets can bring someone home.",
     url: "https://www.mzalendoalert.com",
     siteName: "MzalendoAlert",
-    images: [
-      {
-        url: "/mzalendo-alert.png",
-        width: 800,
-        height: 600,
-      },
-      {
-        url: "/mzalendo-alert.png",
-        width: 1800,
-        height: 1600,
-        alt: "MzalendoAlert",
-      },
-    ],
     locale: "en_US",
     type: "website",
   },

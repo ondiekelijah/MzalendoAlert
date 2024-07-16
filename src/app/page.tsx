@@ -314,7 +314,7 @@ export default function Home() {
           <p>Loading tweets...</p>
         </div>
       ) : (
-        <div className="mt-20 mb-32 grid gap-6 text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-2 lg:text-left">
+        <div className="mt-20 mb-20 grid gap-4 text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-2 lg:text-left">
           {tweets.map((tweet) => (
             <Tweet key={tweet.tweetId} id={tweet.tweetId} />
           ))}

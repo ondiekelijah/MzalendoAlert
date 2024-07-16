@@ -13,7 +13,7 @@ interface AccordionProps {
 function AccordionItem({ title, children }: AccordionItemProps) {
   return (
     <details className="group">
-      <summary className="flex text-green-500 cursor-pointer list-none items-center justify-between py-4 text-lg font-medium text-secondary-900 group-open:text-primary-500">
+      <summary className="flex text-green-500 cursor-pointer list-none items-center justify-between py-4 text-lg font-base text-secondary-900 group-open:text-primary-500">
         {title}
         <div>
           <svg
@@ -53,7 +53,7 @@ function AccordionItem({ title, children }: AccordionItemProps) {
 
 function Accordion({ items }: AccordionProps) {
   return (
-    <div className="w-full max-w-5xl mx-auto mt-24">
+    <div className="w-full max-w-5xl mx-auto mt-14">
       <div className="divide-y divide-gray-100">
         {items.map((item) => (
           <AccordionItem key={item.title} title={item.title}>
