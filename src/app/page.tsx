@@ -31,7 +31,8 @@ export default function Home() {
   const [loading, setLoading] = useState(false); // Indicator if tweets are loading
   const [isModalVisible, setIsModalVisible] = useState(false); // Indicator if the modal is visible
   const [formPending, setFormPending] = useState(false); // Indicator if form submission is pending
-  const limit = 10; // Records per page
+  const [tweetCount, setTweetCount] = useState(0); // Number of tweets
+  const limit = 4; // Records per page
 
   const handleFormToggle = () => {
     setIsFormVisible(!isFormVisible);
@@ -70,6 +71,7 @@ export default function Home() {
       const data = await response.json();
       if (clear) {
         setTweets(data.tweets);
+        setTweetCount(data.total);
         setHasMore(data.tweets.length === limit);
       } else {
         const newTweets = data.tweets.filter(
@@ -80,6 +82,7 @@ export default function Home() {
         );
         if (newTweets.length > 0) {
           setTweets((prevTweets) => [...prevTweets, ...newTweets]);
+
           setHasMore(newTweets.length === limit);
         } else {
           setHasMore(false);
@@ -314,11 +317,23 @@ export default function Home() {
           <p>Loading tweets...</p>
         </div>
       ) : (
-        <div className="mt-20 mb-20 grid gap-4 text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-2 lg:text-left">
-          {tweets.map((tweet) => (
-            <Tweet key={tweet.tweetId} id={tweet.tweetId} />
-          ))}
-        </div>
+        <>
+          {/* Display the number of missing persons */}
+          <div className="mt-5 text-center text-gray-500">
+            <p className="text-sm font-semibold text-gray-500">
+              You are viewing{" "}
+              <span className="text-green-500">{tweets.length}</span> out of{" "}
+              <span className="text-green-500">{tweetCount}</span> reported
+              missing persons. Thank you for helping families reunite!
+            </p>
+          </div>
+
+          <div className="mt-2  grid gap-4 text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-2 lg:text-left overflow-hidden">
+            {tweets.map((tweet) => (
+              <Tweet key={tweet.tweetId} id={tweet.tweetId} />
+            ))}
+          </div>
+        </>
       )}
 
       {tweets.length > 0 && hasMore ? (
