@@ -18,10 +18,10 @@ npm install
 
 3. **Create a MongoDB database:**
 
-Set up a MongoDB database on MongoDB Atlas or your preferred MongoDB service.
-Replace MongoDB URI:
+   Set up a `MongoDB database` on `MongoDB Atlas` or your preferred MongoDB service.
+   Replace MongoDB URI:
 
-Update the MONGODB_URI in your environment variables with your MongoDB username and password.
+   Update the `MONGODB_URI` in your environment variables with your MongoDB `username` and `password`.
 
 ```bash
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.bfhjd.mongodb.net/mzalendoalert?retryWrites=true&w=majority
