@@ -6,11 +6,11 @@ import ScrollToTopButton from "./components/ScrollToTop";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "MzalendoAlert",
+  title: "MzalendoAlert: Help Find Missing Persons Through Tweets",
   description: "Support our efforts to locate missing loved ones. Post tweets, find helpful links, and get guidance on what to do when someone goes missing. Your tweets can bring someone home.",
   metadataBase: new URL("https://www.mzalendoalert.com"),
   openGraph: {
-    title: "MzalendoAlert",
+    title: "MzalendoAlert: Help Find Missing Persons Through Tweets",
     description: "Support our efforts to locate missing loved ones. Post tweets, find helpful links, and get guidance on what to do when someone goes missing. Your tweets can bring someone home.",
     url: "https://www.mzalendoalert.com",
     siteName: "MzalendoAlert",
