@@ -13,7 +13,7 @@ interface AccordionProps {
 function AccordionItem({ title, children }: AccordionItemProps) {
   return (
     <details className="group">
-      <summary className="flex text-green-500 cursor-pointer list-none items-center justify-between py-4 text-lg font-base text-secondary-900 group-open:text-primary-500">
+      <summary className="flex text-green-500 text-base	 cursor-pointer list-none items-center justify-between py-4 font-base text-secondary-900 group-open:text-primary-500">
         {title}
         <div>
           <svg
