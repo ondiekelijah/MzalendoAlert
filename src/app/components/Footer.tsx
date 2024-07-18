@@ -5,7 +5,7 @@ const Footer: React.FC = () => (
         <span className="text-green-500">Mzalendo</span>{" "}
         <span className="text-red-500">Alert</span>
       </p>
-      <p className="small-text my-6 text-gray-400">
+      <p className="small-text my-6 text-gray-500">
         We do not collect user data. All data displayed here are embedded
         tweets.
       </p>
@@ -19,35 +19,14 @@ const Footer: React.FC = () => (
       </a>
     </div>
 
-    <div className="flex flex-col font-mono text-center sm:flex-row justify-between w-full max-w-5xl mx-auto mt-8 mb-4">
-      <a
-        href="https://chatgpt.com/g/g-JBq7D0E5x-finance-bill-gpt"
-        target="_blank"
-        className="text-green-500 mb-4 sm:mb-0"
-      >
-        FinanceBillGPT
-      </a>
+    <div className="flex flex-col items-center font-mono text-center sm:flex-row justify-center space-x-4 sm:space-x-8 w-full max-w-5xl mx-auto mt-8 mb-4">
       <a
         href="https://kenyalaw.org/kl/fileadmin/pdfdownloads/TheConstitutionOfKenya.pdf"
         target="_blank"
-        className="text-green-500"
+        rel="noopener noreferrer"
+        className="text-gray-500 underline inline-flex items-center"
       >
         The Constitution of Kenya
-        <svg
-          className="w-4 h-4 inline-block me-1.5"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M17 8l4 4m0 0l-4 4m4-4H3"
-          />
-        </svg>
       </a>
     </div>
   </>
