@@ -8,7 +8,7 @@ const Header: React.FC<HeaderProps> = ({ supportLink }) => {
   return (
     <div className="z-10 w-full max-w-5xl mx-auto text-sm flex flex-col items-center justify-between lg:flex-row">
       <p className="flex w-full justify-center pb-6 pt-8 lg:relative lg:w-auto lg:rounded-xl text-3xl font-bold">
-        <span className="text-green-500">Mzalendo</span>
+        <span className="text-green-700">Mzalendo</span>
         <span className="text-red-500">Alert</span>
       </p>
       <div className="hidden lg:flex w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:relative lg:p-4 lg:w-auto lg:bg-none">

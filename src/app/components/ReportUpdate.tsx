@@ -8,7 +8,7 @@ interface ReportUpdateProps {
         That&apos;s all for now! Have any updates? Report missing{" "}
         <button
           onClick={onClick}
-          className="text-green-500 hover:underline"
+          className="text-green-700 hover:underline"
         >
           here.
         </button>

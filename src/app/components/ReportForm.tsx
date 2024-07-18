@@ -51,7 +51,7 @@ const ReportForm: React.FC<ReportFormProps> = ({
         >
           <svg
             className={`flex-shrink-0 inline w-4 h-4 me-3 ${
-              message.type === "error" ? "text-red-500" : "text-green-500"
+              message.type === "error" ? "text-red-500" : "text-green-700"
             }`}
             aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@ const ReportForm: React.FC<ReportFormProps> = ({
             <span className="sr-only">Close</span>
             <svg
               className={`w-4 h-4 ${
-                message.type === "error" ? "text-red-500" : "text-green-500"
+                message.type === "error" ? "text-red-500" : "text-green-700"
               }`}
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"

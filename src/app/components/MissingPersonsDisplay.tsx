@@ -13,8 +13,8 @@ const MissingPersonsDisplay: React.FC<MissingPersonsProps> = ({
     {/* Display the number of missing persons */}
     <div className="mt-5 text-center text-gray-500">
       <p className="text-sm font-semibold text-gray-500">
-        You are viewing <span className="text-green-500">{tweets.length}</span>{" "}
-        out of <span className="text-green-500">{tweetCount}</span> reported
+        You are viewing <span className="text-green-700">{tweets.length}</span>{" "}
+        out of <span className="text-green-700">{tweetCount}</span> reported
         missing persons. Thank you for helping families reunite!
       </p>
     </div>

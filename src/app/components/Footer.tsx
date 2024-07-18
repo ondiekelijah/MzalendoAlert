@@ -2,7 +2,7 @@ const Footer: React.FC = () => (
   <>
     <div className="text-center py-10">
       <p className="text-slate-900 font-extrabold text-3xl sm:text-4xl lg:text-5xl tracking-tight dark:text-white flex justify-center">
-        <span className="text-green-500">Mzalendo</span>{" "}
+        <span className="text-green-700">Mzalendo</span>{" "}
         <span className="text-red-500">Alert</span>
       </p>
       <p className="small-text my-6 text-gray-500">
