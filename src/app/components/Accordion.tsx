@@ -54,7 +54,7 @@ function AccordionItem({ title, children }: AccordionItemProps) {
 function Accordion({ items }: AccordionProps) {
   return (
     <div className="w-full max-w-5xl mx-auto mt-14">
-      <div className="divide-y divide-gray-100">
+      <div className="divide-y divide-gray-500">
         {items.map((item) => (
           <AccordionItem key={item.title} title={item.title}>
             {item.content}
